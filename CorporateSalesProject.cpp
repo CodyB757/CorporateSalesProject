@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <stdexcept>
 #include "DivSales.h"
 
 using namespace std;
@@ -58,12 +59,6 @@ bool loadAndDisplayFile(const string& filename) {
     return true;
 }
 
-int main() {
-    loadAndDisplayFile("Corporate_Sales_Quarterly_Test_Data.txt");
-    loadAndDisplayFile("Corporate_Sales_Monthly_Test_Data.txt");
-    return 0;
-}
-
 void runClassTests() {
     cout << "\n=== RULE OF THREE & OPERATOR[] TESTS ===" << endl;
     cout << fixed << setprecision(2);
@@ -75,7 +70,7 @@ void runClassTests() {
     orig[2] = 3000.00;
     orig.addToCorpSales();
 
-    
+  
     DivSales copyObj(orig);
     copyObj[0] = 9999.00;
     cout << "Copy Constructor -> Original[0]: $" << orig[0]
@@ -88,11 +83,13 @@ void runClassTests() {
     cout << "Copy Assignment  -> Original[1]: $" << orig[1]
         << " | Assigned[1]: $" << assignObj[1] << endl;
 
+
     assignObj = assignObj;
     cout << "Self-Assignment  -> Assigned[0]: $" << assignObj[0] << endl;
 
-   
+  
     cout << "Corporate Total after copies: $" << DivSales::getCorpSales() << endl;
+
 
     try {
         cout << orig[5] << endl;
@@ -100,4 +97,11 @@ void runClassTests() {
     catch (const out_of_range& e) {
         cout << "Bounds Check Caught: " << e.what() << endl;
     }
+}
+
+int main() {
+    loadAndDisplayFile("Corporate_Sales_Quarterly_Test_Data.txt");
+    loadAndDisplayFile("Corporate_Sales_Monthly_Test_Data.txt");
+    runClassTests();
+    return 0;
 }
