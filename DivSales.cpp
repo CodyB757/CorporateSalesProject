@@ -6,26 +6,36 @@ using namespace std;
 
 double DivSales::totalCorpSales = 0.0;
 
-DivSales::DivSales(const DivSales& other) {
-    numberOfPeriods = other.numberOfPeriods;
-    sales = new double[numberOfPeriods];
-    for (int i = 0; i < numberOfPeriods; ++i) {
-        sales[i] = other.sales[i];
+double& DivSales::operator[](int index) {
+    if (index < 0 || index >= numberOfPeriods) {
+        throw out_of_range("Sales period index out of bounds.");
     }
+    return sales[index];
 }
 
-DivSales& DivSales::operator=(const DivSales& other) {
-    if (this == &other) {
-        return *this;
+const double& DivSales::operator[](int index) const {
+    if (index < 0 || index >= numberOfPeriods) {
+        throw out_of_range("Sales period index out of bounds.");
     }
+    return sales[index];
+}
 
-    delete[] sales;
-
-    numberOfPeriods = other.numberOfPeriods;
-    sales = new double[numberOfPeriods];
+double DivSales::getTotalSales() const {
+    double total = 0.0;
     for (int i = 0; i < numberOfPeriods; ++i) {
-        sales[i] = other.sales[i];
+        total += sales[i];
     }
+    return total;
+}
 
-    return *this;
+void DivSales::addToCorpSales() const {
+    totalCorpSales += getTotalSales();
+}
+
+double DivSales::getCorpSales() {
+    return totalCorpSales;
+}
+
+void DivSales::resetCorpSales() {
+    totalCorpSales = 0.0;
 }
