@@ -6,26 +6,26 @@ using namespace std;
 
 double DivSales::totalCorpSales = 0.0;
 
-DivSales::DivSales(int numPeriods) {
-    if (numPeriods <= 0) {
-        cout << "Invalid period count. Defaulting to 1." << endl;
-        numberOfPeriods = 1;
-    }
-    else {
-        numberOfPeriods = numPeriods;
-    }
-
+DivSales::DivSales(const DivSales& other) {
+    numberOfPeriods = other.numberOfPeriods;
     sales = new double[numberOfPeriods];
     for (int i = 0; i < numberOfPeriods; ++i) {
-        sales[i] = 0.0;
+        sales[i] = other.sales[i];
     }
 }
 
-DivSales::~DivSales() {
-    delete[] sales;
-    sales = nullptr;
-}
+DivSales& DivSales::operator=(const DivSales& other) {
+    if (this == &other) {
+        return *this;
+    }
 
-int DivSales::getNumberOfPeriods() const {
-    return numberOfPeriods;
+    delete[] sales;
+
+    numberOfPeriods = other.numberOfPeriods;
+    sales = new double[numberOfPeriods];
+    for (int i = 0; i < numberOfPeriods; ++i) {
+        sales[i] = other.sales[i];
+    }
+
+    return *this;
 }
