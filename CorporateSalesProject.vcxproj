@@ -201,6 +201,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CorporateSalesProject.cpp" />
+    <ClCompile Include="DivSales.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\Downloads\Corporate_Sales_Monthly_Test_Data.txt" />
+    <Text Include="..\..\..\Downloads\Corporate_Sales_Quarterly_Test_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DivSales.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
